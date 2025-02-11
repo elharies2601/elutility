@@ -1,6 +1,7 @@
 package id.elutility.core.ext
 
 import android.content.pm.PackageManager
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -21,6 +22,18 @@ fun AppCompatActivity.requestPermission(
     }
 }
 
+fun AppCompatActivity.requestPermission(
+    permission: String,
+    launcher: ActivityResultLauncher<String>,
+    onGranted: () -> Unit,
+) {
+    if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
+        onGranted()
+    } else {
+        launcher.launch(permission)
+    }
+}
+
 fun AppCompatActivity.requestMultiplePermission(
     permissions: Array<String>,
     onAllGranted: () -> Unit,
@@ -31,6 +44,22 @@ fun AppCompatActivity.requestMultiplePermission(
         if (denied.isEmpty()) onAllGranted() else onAnyDenied(denied)
     }
 
+    val deniedPermissions = permissions.filter {
+        ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+    }
+
+    if (deniedPermissions.isEmpty()) {
+        onAllGranted()
+    } else {
+        launcher.launch(deniedPermissions.toTypedArray())
+    }
+}
+
+fun AppCompatActivity.requestMultiplePermission(
+    permissions: Array<String>,
+    launcher: ActivityResultLauncher<Array<String>>,
+    onAllGranted: () -> Unit,
+) {
     val deniedPermissions = permissions.filter {
         ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
     }

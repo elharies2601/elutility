@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="32dp"
     tools:context=".OldActivity">
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -13,6 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="17sp"
         android:inputType="number"
+        android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -21,6 +21,7 @@
         android:text="Tanggal"
         android:textSize="17sp"
         android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintTop_toBottomOf="@id/etAmount"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
@@ -32,6 +33,7 @@
         android:textSize="22sp"
         android:textColor="@color/black"
         android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintTop_toBottomOf="@id/tvTanggal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -40,10 +42,37 @@
         android:id="@+id/btnSend"
         android:textSize="17sp"
         android:text="Send Number"
+        android:layout_marginHorizontal="16dp"
         android:background="@color/purple_700"
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@id/tvResult"
         android:layout_width="match_parent"
         android:layout_height="48dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnShowLoading"
+        android:textAllCaps="false"
+        android:text="Show Loading"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toStartOf="@id/btnHideLoading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSend"
+        android:layout_width="0dp"
+        android:layout_height="48dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnHideLoading"
+        android:text="Hide Loading"
+        android:textAllCaps="false"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@id/btnShowLoading"
+        app:layout_constraintBottom_toBottomOf="@id/btnShowLoading"
+        app:layout_constraintTop_toTopOf="@id/btnShowLoading"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="48dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

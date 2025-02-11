@@ -16,9 +16,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven(url = "https://jitpack.io")
     }
 }
 
 rootProject.name = "El Utility"
 include(":app")
 include(":elutility-core")
+include(":elutility-compose")
