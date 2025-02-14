@@ -1,5 +1,7 @@
 package id.elharies.elutility.compose.component
 
+import android.os.Handler
+import android.os.Looper
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.AlertDialog
@@ -37,6 +39,21 @@ fun LoadingScreen(
             LottieAnimation(lottieComposition, iterations = LottieConstants.IterateForever)
         }
     )
+}
+
+@Composable
+fun LoadingScreen(modifier: Modifier = Modifier, onDismiss: () -> Unit = {}) {
+    val lottieComposition by rememberLottieComposition(
+        LottieCompositionSpec.Asset("loading.json"),
+        imageAssetsFolder = "assets"
+    )
+    AnimatedDialog(onDismiss = onDismiss) {
+        Box(
+            modifier = modifier.size(200.dp),
+        ) {
+            LottieAnimation(lottieComposition, iterations = LottieConstants.IterateForever)
+        }
+    }
 }
 
 @Preview(name = "LoadingScreen")
