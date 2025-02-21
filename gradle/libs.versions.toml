@@ -25,6 +25,7 @@ androidx-navigation = "2.8.6"
 compose-icon = "1.1.1"
 uiTooling = "1.7.7"
 lottie = "6.6.2"
+vanniktechPublish = "0.30.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -71,9 +72,10 @@ lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.24" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization" }
 room = { id = "androidx.room", version.ref = "room" }
+vanniktech-maven = { id = "com.vanniktech.maven.publish", version.ref = "vanniktechPublish" }
