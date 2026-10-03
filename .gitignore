@@ -15,3 +15,7 @@
 .cxx
 local.properties
 gradle.properties
+opencode.json
+.opencode
+PRD.md
+design-rules-neo-brutalism-compose.md

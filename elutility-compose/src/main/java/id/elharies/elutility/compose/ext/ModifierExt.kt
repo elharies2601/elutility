@@ -10,16 +10,18 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 @Composable
 fun Modifier.shimmerEffect(
     shimmerColors: List<Color> = listOf(
-        Color.LightGray.copy(alpha = 0.6f),
-        Color.LightGray.copy(alpha = 0.2f),
-        Color.LightGray.copy(alpha = 0.6f),
+        Color.LightGray.copy(alpha = 0.85f),
+        Color.LightGray.copy(alpha = 0.3f),
+        Color.LightGray.copy(alpha = 0.85f),
     ),
     animationSpec: InfiniteRepeatableSpec<Float> = infiniteRepeatable(
         animation = tween(
@@ -40,12 +42,16 @@ fun Modifier.shimmerEffect(
     )
 
     return this.then(
-        this.background(
-            brush = Brush.linearGradient(
-                colors = shimmerColors,
-                start = Offset(translateAnim.value - gradientWidth, translateAnim.value - gradientWidth),
-                end = Offset(translateAnim.value, translateAnim.value)
+        Modifier.drawWithContent {
+            drawContent()
+            drawRect(
+                brush = Brush.linearGradient(
+                    colors = shimmerColors,
+                    start = Offset(translateAnim.value - gradientWidth, translateAnim.value - gradientWidth),
+                    end = Offset(translateAnim.value, translateAnim.value)
+                ),
+                blendMode = BlendMode.SrcOver
             )
-        )
+        }
     )
 }
