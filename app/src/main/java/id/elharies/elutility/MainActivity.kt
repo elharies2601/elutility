@@ -27,6 +27,7 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -41,6 +42,11 @@ import id.elharies.elutility.compose.component.LoadingScreen
 import id.elharies.elutility.compose.modifier.dashedborder.dashedBorder
 import id.elharies.elutility.compose.modifier.fadingedge.bottomFadingEdge
 import id.elharies.elutility.compose.modifier.fadingedge.topFadingEdge
+import id.elharies.elutility.neobrutal.compose.components.NeoBrutalButton
+import id.elharies.elutility.neobrutal.compose.components.NeoBrutalCard
+import id.elharies.elutility.neobrutal.compose.components.NeoBrutalDialog
+import id.elharies.elutility.neobrutal.compose.components.NeoBrutalOutlinedButton
+import id.elharies.elutility.neobrutal.compose.foundation.NeoBrutalSpacing
 import id.elharies.elutility.ui.theme.ElUtilityTheme
 
 class MainActivity : ComponentActivity() {
@@ -76,6 +82,14 @@ private fun Greeting(modifier: Modifier = Modifier) {
         mutableStateOf(false)
     }
 
+    var isShowDialogBrutalOneButton by remember {
+        mutableStateOf(false)
+    }
+
+    var isShowDialogBrutalTwoButton by remember {
+        mutableStateOf(false)
+    }
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -105,6 +119,28 @@ private fun Greeting(modifier: Modifier = Modifier) {
             isShowAnimateDialog = !isShowAnimateDialog
         }) {
             Text("Show Animated Dialog")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        NeoBrutalButton(text = "Show Brutal Dialog One Button") {
+            isShowDialogBrutalOneButton = true
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        NeoBrutalOutlinedButton(text = "Show Brutal Dialog Two Button") {
+            isShowDialogBrutalTwoButton = true
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        NeoBrutalCard() {
+            Text(
+                text = "Hello NeoUI",
+                style = MaterialTheme.typography.titleLarge
+            )
+            Spacer(
+                modifier = Modifier.height(NeoBrutalSpacing.Md)
+            )
+            Text(
+                text = "This is a Neo-Brutalist card.",
+                style = MaterialTheme.typography.bodyMedium
+            )
         }
 
         AnimatedVisibility(isShowShimmer) {
@@ -136,6 +172,38 @@ private fun Greeting(modifier: Modifier = Modifier) {
 
     if (isShowAnimateDialog) {
         ExampleAnimatedDialog(onDismiss = { isShowAnimateDialog = false })
+    }
+
+    if (isShowDialogBrutalOneButton) {
+        NeoBrutalDialog(
+            title = "Hapus item?",
+            description = "Tindakan ini tidak dapat dibatalkan.",
+            positiveLabel = "Hapus",
+            onPositiveClick = {
+                isShowDialogBrutalOneButton = false
+            },
+            onDismissRequest = {
+                isShowDialogBrutalOneButton = false
+            }
+        )
+    }
+
+    if (isShowDialogBrutalTwoButton) {
+        NeoBrutalDialog(
+            title = "Keluar aplikasi?",
+            description = "Perubahan yang belum disimpan akan hilang.",
+            positiveLabel = "Keluar",
+            onPositiveClick = {
+                isShowDialogBrutalTwoButton = false
+            },
+            negativeLabel = "Batal",
+            onNegativeClick = {
+                isShowDialogBrutalTwoButton = false
+            },
+            onDismissRequest = {
+                isShowDialogBrutalTwoButton = false
+            }
+        )
     }
 }
 

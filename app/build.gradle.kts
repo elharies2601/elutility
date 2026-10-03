@@ -43,6 +43,7 @@ android {
 dependencies {
     implementation(project(path = ":elutility-core"))
     implementation(project(":elutility-compose"))
+    implementation(project(":elutility-neoui-compose"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
